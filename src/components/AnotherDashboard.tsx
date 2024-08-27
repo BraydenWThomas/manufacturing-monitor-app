@@ -18,7 +18,7 @@ const ReturnButton = styled.button`
   margin-bottom: 20px;
 `;
 
-const Dashboard: React.FC = () => {
+const AnotherDashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const processData = useSelector((state: RootState) => state.process.data);
 
@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard">
-      <h1>Manufacturing Process Dashboard</h1>
+      <h1>Another Dashboard</h1>
       <ReturnButton onClick={handleReturn}>Return to Main Screen</ReturnButton>
       <MetricsPanel data={processData} />
       <ProcessChart data={processData} />
@@ -48,4 +48,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default AnotherDashboard;

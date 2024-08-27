@@ -17,6 +17,12 @@ const Title = styled.h1`
   margin-bottom: 20px;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
 const DashboardButton = styled.button`
   background-color: #1a73e8;
   color: white;
@@ -34,10 +40,17 @@ const MainScreen: React.FC = () => {
     navigate('/dashboard');
   };
 
+  const goToAnotherDashboard = () => {
+    navigate('/another-dashboard'); // Navigate to another dashboard
+  };
+
   return (
     <MainContainer>
       <Title>Welcome to the Manufacturing Monitor</Title>
-      <DashboardButton onClick={goToDashboard}>Go to Dashboard</DashboardButton>
+      <ButtonContainer>
+        <DashboardButton onClick={goToDashboard}>Go to Dashboard</DashboardButton>
+        <DashboardButton onClick={goToAnotherDashboard}>Go to Another Dashboard</DashboardButton>
+      </ButtonContainer>
     </MainContainer>
   );
 };
