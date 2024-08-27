@@ -1,4 +1,3 @@
-// Create Mock Data
 export const monitorProcess = () => {
   const processData = [];
   
@@ -14,9 +13,17 @@ export const monitorProcess = () => {
   return processData;
 };
 
-export const startMonitoring = (sendData: (data: any) => void) => {
-  setInterval(() => {
-    const data = monitorProcess();
-    sendData(data);  // Send new data to the renderer process
-  }, 1000);  // Update every 3 seconds
+export const monitorAnotherProcess = () => {
+  const anotherProcessData = [];
+
+  for (let i = 0; i < 10; i++) {
+    anotherProcessData.push({
+      timestamp: new Date().toLocaleTimeString(),
+      productionRate: Math.floor(Math.random() * 100) + 50, // Different data logic
+      machineStatus: Math.random() > 0.2 ? 'Operational' : 'Maintenance Required',
+      qualityControl: `${Math.floor(Math.random() * 100)}%`,
+    });
+  }
+
+  return anotherProcessData;
 };

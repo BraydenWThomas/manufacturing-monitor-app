@@ -8,29 +8,35 @@ const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: #f0f2f5;
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #1a73e8;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 `;
 
 const DashboardButton = styled.button`
   background-color: #1a73e8;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #1558b0;
+  }
 `;
 
 const MainScreen: React.FC = () => {
@@ -41,14 +47,14 @@ const MainScreen: React.FC = () => {
   };
 
   const goToAnotherDashboard = () => {
-    navigate('/another-dashboard'); // Navigate to another dashboard
+    navigate('/another-dashboard');
   };
 
   return (
     <MainContainer>
-      <Title>Welcome to the Manufacturing Monitor</Title>
+      <Title>Manufacturing Monitor</Title>
       <ButtonContainer>
-        <DashboardButton onClick={goToDashboard}>Go to Dashboard</DashboardButton>
+        <DashboardButton onClick={goToDashboard}>Go to Manufacturing Process Dashboard</DashboardButton>
         <DashboardButton onClick={goToAnotherDashboard}>Go to Another Dashboard</DashboardButton>
       </ButtonContainer>
     </MainContainer>
