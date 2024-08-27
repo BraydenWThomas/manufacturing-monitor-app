@@ -1,13 +1,18 @@
 import React from 'react';
-import Dashboard from './components/Dashboard';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
+import MainScreen from './components/MainScreen';
+import Dashboard from './components/Dashboard';
 
 const App = () => (
   <>
     <GlobalStyle />
-    <div className="app">
-      <Dashboard />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainScreen />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   </>
 );
 
