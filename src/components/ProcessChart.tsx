@@ -1,9 +1,8 @@
-import styled from 'styled-components';
 import React from 'react';
+import styled from 'styled-components';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 
-// Register the required components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ChartContainer = styled.div`
@@ -14,16 +13,21 @@ const ChartContainer = styled.div`
 `;
 
 interface ProcessChartProps {
-  data: any;
+  data: any[];
 }
 
 const ProcessChart: React.FC<ProcessChartProps> = ({ data }) => {
+  const getTimeAgoLabel = (index: number) => {
+    const secondsAgo = 60 - index; // Calculate how many seconds ago this point was
+    return `${secondsAgo} sec ago`;
+  };
+
   const chartData = {
-    labels: data.map((item: any) => item.timestamp),
+    labels: data.map((_, index) => getTimeAgoLabel(index)),
     datasets: [
       {
         label: 'Production Rate',
-        data: data.map((item: any) => item.productionRate),
+        data: data.map((item) => item.productionRate || 0), // Default to 0 if undefined
         fill: false,
         backgroundColor: 'rgba(75,192,192,0.6)',
         borderColor: 'rgba(75,192,192,1)',
@@ -31,10 +35,34 @@ const ProcessChart: React.FC<ProcessChartProps> = ({ data }) => {
     ],
   };
 
+  const options: ChartOptions<'line'> = {
+    scales: {
+      x: {
+        type: 'category',
+        title: {
+          display: true,
+          text: 'Time',
+        },
+        ticks: {
+          callback: function(value, index) {
+            return index % 10 === 0 ? value : ''; // Show label every 10 intervals (10 seconds)
+          }
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Production Rate',
+        },
+        beginAtZero: true,
+      },
+    },
+  };
+
   return (
     <ChartContainer>
       <h2>Production Rate Over Time</h2>
-      <Line data={chartData} />
+      <Line data={chartData} options={options} />
     </ChartContainer>
   );
 };
