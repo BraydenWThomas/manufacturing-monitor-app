@@ -8,35 +8,44 @@ import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
 
 const DashboardContainer = styled.div`
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: #f0f2f5;
 `;
 
 const Header = styled.h1`
   font-size: 2.5rem;
   color: #1a73e8;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 const ReturnButton = styled.button`
   background-color: #1a73e8;
   color: white;
-  padding: 15px 30px;
+  padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.2rem;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   transition: background-color 0.3s;
 
   &:hover {
     background-color: #1558b0;
   }
+`;
+
+const ChartWrapper = styled.div`
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
 `;
 
 const Dashboard: React.FC = () => {
@@ -64,7 +73,9 @@ const Dashboard: React.FC = () => {
       <Header>Manufacturing Process Dashboard</Header>
       <ReturnButton onClick={handleReturn}>Return to Main Screen</ReturnButton>
       <MetricsPanel data={processData} />
-      <ProcessChart data={processData} />
+      <ChartWrapper>
+        <ProcessChart data={processData} />
+      </ChartWrapper>
     </DashboardContainer>
   );
 };

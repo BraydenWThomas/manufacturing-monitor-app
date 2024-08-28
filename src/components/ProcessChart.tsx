@@ -6,8 +6,10 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ChartContainer = styled.div`
+  width: 100%;              // Full width of the parent container
+  height: 100%;             // Full height of the parent container
+  max-height: 600px;        // Optional: Max height to avoid stretching too much
   background-color: #f1f3f4;
-  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 `;
@@ -36,6 +38,7 @@ const ProcessChart: React.FC<ProcessChartProps> = ({ data }) => {
   };
 
   const options: ChartOptions<'line'> = {
+    maintainAspectRatio: false,   // Disable aspect ratio to allow flexible resizing
     scales: {
       x: {
         type: 'category',
@@ -61,7 +64,6 @@ const ProcessChart: React.FC<ProcessChartProps> = ({ data }) => {
 
   return (
     <ChartContainer>
-      <h2>Production Rate Over Time</h2>
       <Line data={chartData} options={options} />
     </ChartContainer>
   );
